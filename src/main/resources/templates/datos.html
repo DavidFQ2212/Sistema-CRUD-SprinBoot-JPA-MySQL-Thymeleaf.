@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos de prestamos</title>
+
+    <link rel="stylesheet" th:href="@{/Styles/main.css}" type="text/css">
+</head>
+
+<body>
+    <div class="containerG">
+        <div class="formulario">
+            <form th:action="@{/guardar}" method="post" th:object="${alumno}">
+                <input type="hidden" th:field="*{id_alumno}">
+                <label for="">Nombre:</label>
+                <br>
+                <input type="text" name="nombre" th:field="*{nombre}">
+                <br>
+                <label for="">Apellido:</label>
+                <br>
+                <input type="text" name="apellido" id="" th:field="*{apellido}">
+                <br>
+                <label for="">Numero de control:</label>
+                <br>
+                <input type="text" name="numerocontrol" id="" th:field="*{numerocontrol}">
+                <br>
+                <label for="">Libro:</label>
+                <br>
+                <input type="text" name="libro" id="" th:field="*{libro}">
+                <br>
+                <label for="">Editorial:</label>
+                <br>
+                <input type="text" name="editorial" id="" th:field="*{editorial}">
+                <br>
+                <label for="">Fecha de pedido:</label>
+                <br>
+                <input type="text" name="fechapedido" id="" th:field="*{fechapedido}">
+                <br>
+                <input type="submit" value="Enviar" name="guardar">
+            </form>
+
+
+        </div>
+        <div class="tabContainer" th:if="${alumnos != null and !alumnos.empty}">
+            <table border="1">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Numero de Control</th>
+                    <th>Libro</th>
+                    <th>Editorial</th>
+                    <th>Fecha de pedido</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr th:each="alumno : ${alumnos}">
+
+                    <td th:text="${alumno.nombre}"></td>
+                    <td th:text="${alumno.apellido}"></td>
+                    <td th:text="${alumno.numerocontrol}"></td>
+                    <td th:text="${alumno.libro}"></td>
+                    <td th:text="${alumno.editorial}"></td>
+                    <td th:text="${alumno.fechapedido}"></td>
+
+                    <td><a class="btnVerde" th:href="@{/editar/} + ${alumno.id_alumno}">Editar</a></td>
+                    <td><a class="btnRojo" th:href="@{/eliminar/} + ${alumno.id_alumno}">Eliminar</a></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
